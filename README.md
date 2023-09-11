@@ -1,6 +1,6 @@
 <img align="left" src="https://user-images.githubusercontent.com/4380779/63980279-f0b3b300-ca6f-11e9-9953-1afba2a45b18.png" width="200" alt="Secret Baker Logo" />
  Serverless Secret Baker is a Serverless Framework Plugin for secure, performant, and deterministic secret
-management using AWS Systems Manager Parameter Store and AWS KMS.
+management using AWS Systems Manager Parameter Store, AWS Secrets Manager, and AWS KMS.
   
 [![CircleCI](https://circleci.com/gh/vacasaoss/serverless-secret-baker.svg?style=svg)](https://circleci.com/gh/vacasaoss/serverless-secret-baker) [![Maintainability](https://api.codeclimate.com/v1/badges/40209674df1a65e0112b/maintainability)](https://codeclimate.com/github/vacasaoss/serverless-secret-baker/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/40209674df1a65e0112b/test_coverage)](https://codeclimate.com/github/vacasaoss/serverless-secret-baker/test_coverage) 
 

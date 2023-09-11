@@ -40,30 +40,30 @@ class ServerlessSecretBaker {
   }
 
   getSecretsConfig() {
-      const customPath = this.serverless.service.custom;
-      const configPath = customPath && customPath.secretBaker;
-      const secrets = configPath || [];
+    const customPath = this.serverless.service.custom;
+    const configPath = customPath && customPath.secretBaker;
+    const secrets = configPath || [];
 
-      if (Array.isArray(secrets)) {
-          return secrets.map((item) => {
-              if (typeof item === 'string') {
-                  return {
-                      name: item,
-                      path: item
-                  }
-              } else {
-                  return item
-              }
-          })
-      } else if (typeof secrets === 'object') {
-          return Object.entries(secrets).map(([name, path]) => ({
-              name,
-              path
-          }));
-      }
-      throw new this.serverless.classes.Error(
-          "Secret Baker configuration contained an unexpected value."
-      );
+    if (Array.isArray(secrets)) {
+      return secrets.map((item) => {
+        if (typeof item === 'string') {
+          return {
+            name: item,
+            path: item
+          }
+        } else {
+          return item
+        }
+      })
+    } else if (typeof secrets === 'object') {
+      return Object.entries(secrets).map(([name, path]) => ({
+        name,
+        path
+      }));
+    }
+    throw new this.serverless.classes.Error(
+      "Secret Baker configuration contained an unexpected value."
+    );
   }
 
   async writeSecretToFile() {
@@ -71,7 +71,7 @@ class ServerlessSecretBaker {
     const secrets = {};
 
 
-    for (const {name, path} of providerSecrets) {
+    for (const { name, path } of providerSecrets) {
       const param = await this.getParameterFromSsm(path);
 
       if (!param) {
@@ -99,6 +99,26 @@ class ServerlessSecretBaker {
         },
         { useCache: true }
       ) // Use request cache
+      .then(response => BbPromise.resolve(response.Parameter))
+      .catch(err => {
+        if (err.statusCode !== 400) {
+          return BbPromise.reject(
+            new this.serverless.classes.Error(err.message)
+          );
+        }
+
+        return BbPromise.resolve(undefined);
+      });
+  }
+
+  getParameterFromSecretsManager(name) {
+    return this.serverless.getProvider('aws').request('SecretsManager', 'getParameter',
+      {
+        Name: name,
+        WithDecryption: false
+      },
+      { useCache: true }
+    ) // Use request cache
       .then(response => BbPromise.resolve(response.Parameter))
       .catch(err => {
         if (err.statusCode !== 400) {

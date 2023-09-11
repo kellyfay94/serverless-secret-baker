@@ -2,7 +2,7 @@ service: secret-baker-example # NOTE: update this with your service name
 
 provider:
   name: aws
-  runtime: nodejs14.x
+  runtime: nodejs18.x
 
   region: us-west-2
   iamRoleStatements:
@@ -21,7 +21,7 @@ functions:
   test-node:
     handler: handler.hello
   test-python:
-    runtime: python3.8
+    runtime: python3.11
     handler: handler.hello
 
 custom:

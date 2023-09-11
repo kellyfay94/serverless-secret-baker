@@ -22,14 +22,16 @@
   },
   "homepage": "https://github.com/vacasaoss/serverless-secret-baker#readme",
   "dependencies": {
-    "aws-sdk": "^2.715.0"
+    "aws-sdk": "^2.1454.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
+    "eslint": "^8.49.0",
     "mocha": "^8.3.2",
     "nyc": "^15.1.0",
-    "serverless": "^2.31.0",
+    "prettier": "^3.0.3",
+    "serverless": "^3.34.0",
     "sinon": "^9.0.2",
     "sinon-chai": "^3.5.0"
   }
