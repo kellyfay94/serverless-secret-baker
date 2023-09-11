@@ -1,3 +1,8 @@
+/**
+ * During the CircleCI Build Pipeline, checks that the Git Tag matches the
+ *  versions in package.json and package-lock.json
+ */
+
 const packageVersion = require(`${process.cwd()}/package.json`).version;
 const packageLockVersion = require(`${process.cwd()}/package-lock.json`).version;
 
