@@ -2,13 +2,19 @@
   "name": "serverless-secret-baker",
   "version": "2.1.0",
   "description": "Serverless Framework Plugin for enabling secure and deterministic runtime decryption of secrets",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "check-version": "node ./scripts/check-version.js",
-    "test": "mocha \"tests/**/*.test.js\"",
-    "test-ci": "./scripts/run-tests-coverage",
-    "test-coverage": "nyc --reporter lcov npm test",
-    "test-watch": "mocha \"tests/**/*.test.js\" --watch"
+    "clean": "rm -rf dist/",
+    "build": "npm run clean && tsc",
+    "test": "ts-mocha \"src/**/*.test.ts\"",
+    "test:ci": "./scripts/run-tests-coverage",
+    "test:coverage": "nyc --reporter lcov npm test",
+    "test:watch": "ts-mocha \"src/**/*.test.js\" --watch",
+    "format": "prettier --write src/",
+    "format:check": "prettier --check src/",
+    "lint": "eslint src/",
+    "lint:fix": "npm run lint -- --fix",
+    "check-version": "node ./scripts/check-version.js"
   },
   "files": [],
   "repository": {
@@ -22,15 +28,30 @@
   },
   "homepage": "https://github.com/vacasaoss/serverless-secret-baker#readme",
   "dependencies": {
-    "aws-sdk": "^2.715.0"
+    "@aws-sdk/client-ssm": "^3.418.0"
   },
   "devDependencies": {
+    "@aws-sdk/types": "^3.418.0",
+    "@types/chai": "^4.3.6",
+    "@types/chai-as-promised": "^7.1.6",
+    "@types/expect": "^24.3.0",
+    "@types/mocha": "^10.0.2",
+    "@types/serverless": "^3.12.15",
+    "@types/sinon": "^10.0.18",
+    "@types/sinon-chai": "^3.2.10",
+    "@typescript-eslint/eslint-plugin": "^6.7.4",
+    "@typescript-eslint/parser": "^6.7.4",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "mocha": "^8.3.2",
+    "eslint": "^8.50.0",
     "nyc": "^15.1.0",
-    "serverless": "^2.31.0",
+    "prettier": "^3.0.3",
+    "serverless": "3.35.2",
     "sinon": "^9.0.2",
-    "sinon-chai": "^3.5.0"
+    "sinon-chai": "^3.5.0",
+    "ts-mocha": "^10.0.0"
+  },
+  "peerDependencies": {
+    "serverless": "^3.35.2"
   }
 }
