@@ -9,6 +9,3 @@ node_modules
 cc-test-reporter
 coverage/
 .nyc_output/
-
-# built files
-dist/

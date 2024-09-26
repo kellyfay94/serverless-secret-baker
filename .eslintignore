@@ -1,0 +1,7 @@
+.git/
+.circleci/
+.github/
+examples/
+node_modules/
+dist/
+*.test.ts
